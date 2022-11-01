@@ -1,0 +1,86 @@
+<Dashboard>:
+    MDFloatLayout:
+        MDTextField:
+            mode: "rectangle"
+            hint_text: "Teacher's Name"
+            size_hint: (0.7, 0.1)
+            pos_hint: {"center_x": 0.5, "top": 0.75}
+
+        MDLabel:
+            text: "Attendance Manager"
+            size_hint: (0.8, 0.1)
+            pos_hint: {"center_x": 0.5, "top": 0.9}
+            halign: "center"
+
+
+        MDTextField:
+            hint_text: "Section"
+            pos_hint: {"x": 0.15, "top": 0.60}
+            size_hint: (0.3, 0.1)
+
+
+        MDRectangleFlatButton:
+            text: "Take Attendance!"
+            size_hint: (0.3, 0.07)
+            pos_hint: {"center_x": 0.5, "top": 0.3}
+            on_press: root.to_attendance()
+
+
+<AttendancePage>:
+    qrcode_holder: qrcode_holder.__self__
+    ah: ah.__self__
+    MDFloatLayout:
+        MDCard:
+            canvas:
+                Color:
+                    rgba: app.theme_cls.bg_normal
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+
+            size_hint: (0.85, 0.8)
+            pos_hint: {"center_x": 0.5, "top": 0.95}
+            orientation: "vertical"
+            MDLabel:
+                id: ah
+                text: "Attendance hash:"
+                size_hint: (1, 0.2)
+                halign: "center"
+
+            MDSeparator:
+                height: "2px"
+
+
+            AsyncImage:
+                id: qrcode_holder
+                size: (1, 0.8)
+
+        MDRaisedButton:
+            text: "Finish Session"
+            md_bg_color: app.theme_cls.bg_dark
+            text_color: "white"
+            size_hint: (0.5, 0.1)
+            pos_hint: {"top": 0.125, "x": 0.075}
+
+
+
+
+
+
+<RootWidget>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "assets/gradient.jpeg"
+
+    dashboard: dashboard.__self__
+    attendance_page: attendance_page.__self__
+
+    Dashboard:
+        id: dashboard
+        name: "dashboard"
+
+    AttendancePage:
+        id: attendance_page
+        name: "attendance"
