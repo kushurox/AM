@@ -1,10 +1,16 @@
+
 <Dashboard>:
+    tname: tname.__self__
+    section: section.__self__
     MDFloatLayout:
         MDTextField:
+            id: tname
             mode: "rectangle"
-            hint_text: "Teacher's Name"
+            hint_text: "Staff's Name"
             size_hint: (0.7, 0.1)
             pos_hint: {"center_x": 0.5, "top": 0.75}
+            line_color_normal: "cyan"
+            hint_text_color_normal: "cyan"
 
         MDLabel:
             text: "Attendance Manager"
@@ -14,21 +20,25 @@
 
 
         MDTextField:
+            id: section
             hint_text: "Section"
             pos_hint: {"x": 0.15, "top": 0.60}
-            size_hint: (0.3, 0.1)
+            size_hint: (0.3, 0.12)
+            line_color_normal: "cyan"
+            hint_text_color_normal: "cyan"
 
 
         MDRectangleFlatButton:
-            text: "Take Attendance!"
+            text: "Start Session"
             size_hint: (0.3, 0.07)
             pos_hint: {"center_x": 0.5, "top": 0.3}
-            on_press: root.to_attendance()
+            on_release: root.to_attendance()
 
 
 <AttendancePage>:
     qrcode_holder: qrcode_holder.__self__
     ah: ah.__self__
+    roll_no: roll_no.__self__
     MDFloatLayout:
         MDCard:
             canvas:
@@ -38,7 +48,7 @@
                     pos: self.pos
                     size: self.size
 
-            size_hint: (0.85, 0.8)
+            size_hint: (0.85, 0.6)
             pos_hint: {"center_x": 0.5, "top": 0.95}
             orientation: "vertical"
             MDLabel:
@@ -50,19 +60,40 @@
             MDSeparator:
                 height: "2px"
 
-
             AsyncImage:
                 id: qrcode_holder
                 size: (1, 0.8)
 
+        MDTextField:
+            id: roll_no
+            hint_text: "Roll No"
+            size_hint: (0.45, 0.1)
+            pos_hint: {"top": 0.25, "x": 0.075}
+
+
         MDRaisedButton:
-            text: "Finish Session"
+            text: "Take me back!"
             md_bg_color: app.theme_cls.bg_dark
             text_color: "white"
-            size_hint: (0.5, 0.1)
+            size_hint: (0.45, 0.1)
             pos_hint: {"top": 0.125, "x": 0.075}
+            on_release: setattr(root.parent, "current", "dashboard")
 
+        MDRaisedButton:
+            text: "Mark as Present"
+            md_bg_color: "purple"
+            text_color: "white"
+            size_hint: (0.35, 0.1)
+            pos_hint: {"top": 0.25, "x": 0.575}
+            on_release: root.mark_as_present(root.roll_no.text)
 
+        MDRaisedButton:
+            text: "Finish Session"
+            md_bg_color: "green"
+            text_color: "white"
+            size_hint: (0.35, 0.1)
+            pos_hint: {"top": 0.125, "x": 0.575}
+            on_release: root.finish_session()
 
 
 

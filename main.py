@@ -1,23 +1,28 @@
+import json
+import os
+
+from kivy import Config
+from kivy.uix.screenmanager import NoTransition
+
+Config.set("graphics", "multisamples", 2)
+
+
 from kivymd.app import MDApp
-from kivymd.uix.screenmanager import MDScreenManager
+from kivy.uix.screenmanager import ScreenManager
 from kivy.core.window import Window
-import uuid
 from utils.pages import Dashboard, AttendancePage
 
 
-class RootWidget(MDScreenManager):
+class RootWidget(ScreenManager):
     STATE = {}
 
-    def __init__(self, *args, **kwargs):
-        super(RootWidget, self).__init__(*args, **kwargs)
-
-    def btn_pressed(self):
-        print("Pressed")
+    def __init__(self):
+        super(RootWidget, self).__init__()
+        self.transition = NoTransition()
 
 
 class AM(MDApp):
     def build(self):
-        Window.maximize()
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Orange"
         return RootWidget()

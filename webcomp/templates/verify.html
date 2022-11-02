@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Attend</title>
+</head>
+<body>
+    <h3>For now we are taking input from student which isn't desired at all. in the future i will make a seperate app which
+    uniquely identifies roll no by their pesu app credentials or device ID to automatically verify attendance to reduce
+    proxy/fake attendance</h3>
+
+    <form action="/commit" method="post">
+        <label for="wow">Enter Roll no</label>
+        <input value="{{ hash }}" hidden>
+        <input type="number" id="wow" name="rollno">
+        <button>Submit</button>
+    </form>
+
+</body>
+</html>
